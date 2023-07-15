@@ -1,4 +1,10 @@
 import os, subprocess, time
+##==================================================================================================================##
+##==================================================================================================================##
+
+CompileSounds = False
+CompileSoundEvents = True
+CompileResourceManifest = True
 
 sounds_dir = "./sounds/"
 soundevents_dir = "./soundevents/"
@@ -8,6 +14,8 @@ resource_manifest = "sp_a2_core_addon_resources.vrman"
 #MAKE SURE YOU CHANGE THIS PATH TO YOUR RESOURCECOMPILER EXECUTABLE
 resource_compiler_path = r"E:\SteamLibrary\steamapps\common\Half-Life Alyx\game\bin\win64\resourcecompiler.exe"
 
+##==================================================================================================================##
+##==================================================================================================================##
 def create_resource_manifest(soundevents_files):
     manifest = '<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->\n'
     manifest += "{\n\tresourceManifest = \n\t[\n\t\t[\n"
@@ -68,9 +76,12 @@ def create_soundevent_files():
         f.write(resource_manifest_content)
     print(f"Resource manifest file created successfully: {resource_manifest_path}")
 
-    compile_sound()
-    compile_soundevents()
-    compile_resource_manifest()
+    if CompileSounds:
+        compile_sound()
+    if CompileSoundEvents:
+        compile_soundevents()
+    if CompileResourceManifest:
+        compile_resource_manifest()
 
 def compile_sound():
     print("Compiling sounds")
